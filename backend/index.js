@@ -1,20 +1,16 @@
-const express = require('express');
-const Pool = require('pg').Pool;
-const cors = require('cors');
+import express, { json } from 'express';
+import cors from 'cors';
+import { setupdb } from "./db/setupdb.js"
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 //middleware
 app.use(cors())
-app.use(express.json())
+app.use(json())
 
-const pool = new Pool({
-    user: "postgres",
-    host: "localhost",
-    database: "postgres",
-    port: 5432
-});
+//run and create database
+setupdb();
 
 // Start the server
 app.listen(PORT, () => {
