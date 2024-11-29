@@ -13,6 +13,11 @@ app.use(json())
 //run and create database
 setupdb();
 
+//setup root route
+app.get("/", (req, res) => {
+    res.send("Hello from root node");
+});
+
 //set up routes
 app.use("/pokemon", router);
 
