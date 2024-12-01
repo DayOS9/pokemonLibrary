@@ -1,8 +1,11 @@
 import React from "react";
+import "./SearchBar.css"
 
 function SearchBar() {
     return (
-        <input placeholder="Type to search Pokemon" />
+        <div className="input-wrapper">
+            <input placeholder="Type to search Pokemon" />
+        </div>
     )
 };
 
