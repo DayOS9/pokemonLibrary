@@ -2,7 +2,7 @@ import React from "react";
 
 function Header() {
     return (
-        <header className="header">
+        <header >
             <h1>Pokemon Library</h1>
             Daois Sanchez Mora<br />
             Justine Sanchez Mora<br />
