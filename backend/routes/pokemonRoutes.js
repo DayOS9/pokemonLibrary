@@ -17,7 +17,7 @@ router.get("/pokemon/type/:type", getByType);
 
 router.get("/pokemon/color/:color", getByColor);
 
-router.get("/pokemon/:ability", getByAbility);
+router.get("/pokemon/ability/:ability", getByAbility);
 
 router.get("/pokemon/generation/:generation", getByGeneration);
 
