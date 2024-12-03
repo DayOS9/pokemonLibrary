@@ -1,3 +1,10 @@
+
+/*DROP TABLE IF EXISTS pokemon;
+DROP TABLE IF EXISTS color;
+DROP TABLE IF EXISTS generation;
+DROP TABLE IF EXISTS ability;
+DROP TABLE IF EXISTS typing;*/
+
 CREATE TABLE IF NOT EXISTS typing (
     t_primarytype text PRIMARY KEY,
     t_list int[]
@@ -37,51 +44,130 @@ CREATE TABLE IF NOT EXISTS pokemon (
 
 INSERT INTO typing (t_primarytype, t_list)
 VALUES
-('fire', '{4, 157, 219}'),
-('water', '{54, 272}'),
-('rock', '{95, 142}'),
-('ground', '{105, 383}'),
-('normal', '{133}'),
-('psychic', '{196}'),
-('dark', '{197}'),
-('grass', '{275, 331}'),
-('dragon', '{371}')
+('normal', '{}'),
+('fire', '{}'),
+('water', '{}'),
+('electric', '{}'),
+('grass', '{}'),
+('ice', '{}'),
+('fighting', '{}'),
+('poison', '{}'),
+('ground', '{}'),
+('flying', '{}'),
+('psychic', '{}'),
+('bug', '{}'),
+('rock', '{}'),
+('ghost', '{}'),
+('dragon', '{}'),
+('dark', '{}'),
+('steel', '{}'),
+('fairy', '{}')
 ON CONFLICT (t_primarytype) DO NOTHING;
 
 INSERT INTO ability (a_primaryability, a_list)
 VALUES
-('blaze', '{4, 157}'),
-('damp', '{54}'),
-('rock-head', '{95, 105, 142, 371}'),
-('run-away', '{133}'),
-('synchronize', '{196, 197}'),
-('magma-armor', '{219}'),
-('swift-swim', '{272}'),
-('chlorophyll', '{275}'),
-('sand-veil', '{331}'),
-('drought', '{383}')
+('air-lock', '{}'),
+('arena-trap', '{}'),
+('battle-armor', '{}'),
+('blaze', '{}'),
+('cacophony', '{}'),
+('chlorophyll', '{}'),
+('clear-body', '{}'),
+('cloud-nine', '{}'),
+('color-change', '{}'),
+('compound-eyes', '{}'),
+('cursed-body', '{}'),
+('cute-charm', '{}'),
+('damp', '{}'),
+('drizzle', '{}'),
+('drought', '{}'),
+('early-bird', '{}'),
+('effect-spore', '{}'),
+('flame-body', '{}'),
+('flash-fire', '{}'),
+('forecast', '{}'),
+('guts', '{}'),
+('huge-power', '{}'),
+('hustle', '{}'),
+('hyper-cutter', '{}'),
+('illuminate', '{}'),
+('immunity', '{}'),
+('inner-focus', '{}'),
+('insomnia', '{}'),
+('intimidate', '{}'),
+('keen-eye', '{}'),
+('levitate', '{}'),
+('lightning-rod', '{}'),
+('limber', '{}'),
+('liquid-ooze', '{}'),
+('magma-armor', '{}'),
+('magnet-pull', '{}'),
+('marvel-scale', '{}'),
+('minus', '{}'),
+('natural-cure', '{}'),
+('oblivious', '{}'),
+('overgrow', '{}'),
+('own-tempo', '{}'),
+('pickup', '{}'),
+('plus', '{}'),
+('poison-point', '{}'),
+('pressure', '{}'),
+('pure-power', '{}'),
+('rain-dish', '{}'),
+('rock-head', '{}'),
+('rough-skin', '{}'),
+('run-away', '{}'),
+('sand-stream', '{}'),
+('sand-veil', '{}'),
+('serene-grace', '{}'),
+('shadow-tag', '{}'),
+('shed-skin', '{}'),
+('shell-armor', '{}'),
+('shield-dust', '{}'),
+('soundproof', '{}'),
+('speed-boost', '{}'),
+('static', '{}'),
+('stench', '{}'),
+('sticky-hold', '{}'),
+('sturdy', '{}'),
+('suction-cups', '{}'),
+('swarm', '{}'),
+('swift-swim', '{}'),
+('synchronize', '{}'),
+('thick-fat', '{}'),
+('torrent', '{}'),
+('trace', '{}'),
+('truant', '{}'),
+('vital-spirit', '{}'),
+('volt-absorb', '{}'),
+('water-absorb', '{}'),
+('water-veil', '{}'),
+('white-smoke', '{}'),
+('wonder-guard', '{}')
 ON CONFLICT (a_primaryability) DO NOTHING;
 
 INSERT INTO generation (g_generationname, g_list)
 VALUES
-('generation-i', '{4, 54, 95, 105, 133, 142}'),
-('generation-ii', '{157, 196, 197, 219}'),
-('generation-iii', '{272, 275, 331, 371, 383}')
+('generation-i', '{}'),
+('generation-ii', '{}'),
+('generation-iii', '{}')
 ON CONFLICT (g_generationname) DO NOTHING;
 
 INSERT INTO color (c_colorname, c_list)
 VALUES
-('red', '{4, 219, 383}'),
-('yellow', '{54, 157}'),
-('gray', '{95}'),
-('brown', '{105, 133, 275}'),
-('purple', '{142, 196}'),
-('black', '{197}'),
-('green', '{272, 331}'),
-('blue', '{371}')
+('red', '{}'),
+('blue', '{}'),
+('yellow', '{}'),
+('green', '{}'),
+('black', '{}'),
+('brown', '{}'),
+('purple', '{}'),
+('gray', '{}'),
+('white', '{}'),
+('pink', '{}')
 ON CONFLICT (c_colorname) DO NOTHING;
 
-INSERT INTO pokemon (dexid, dexname, dexhp, dexattack, dexdefense, dexspecialattack, dexspecialdefense, dexspeed, dexweight, dexheight, t_primarytype, a_primaryability, g_generationname, c_colorname)
+/*INSERT INTO pokemon (dexid, dexname, dexhp, dexattack, dexdefense, dexspecialattack, dexspecialdefense, dexspeed, dexweight, dexheight, t_primarytype, a_primaryability, g_generationname, c_colorname)
 VALUES 
 (4, 'charmander', 39, 52, 43, 60, 50, 65, 85, 6, 'fire', 'blaze', 'generation-i', 'red'),
 (54, 'psyduck', 50, 52, 48, 65, 50, 55, 196, 8, 'water', 'damp', 'generation-i', 'yellow'),
@@ -98,5 +184,5 @@ VALUES
 (331, 'cacnea', 50, 85, 40, 85, 40, 35, 513, 4, 'grass', 'sand-veil', 'generation-iii', 'green'),
 (371, 'bagon', 45, 75, 60, 40, 30, 50, 421, 6, 'dragon', 'rock-head', 'generation-iii', 'blue'),
 (383, 'groudon', 100, 150, 140, 100, 90, 90, 9500, 35, 'ground', 'drought', 'generation-iii', 'red')
-ON CONFLICT (dexid) DO NOTHING;
+ON CONFLICT (dexid) DO NOTHING;*/
 
