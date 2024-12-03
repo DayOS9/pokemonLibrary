@@ -8,13 +8,12 @@ const __dirname = dirname(__filename);
 const filepath = join(__dirname, "init.sql");
 
 const setupdb = async () => {
-    try {
-        const sql = readFileSync(filepath, "utf8");
-        await pool.query(sql);
-        console.log("Database was created successfully");
-    } catch (error) {
-        console.error("An error has occurred when created database:", error);
-    }
+  try {
+    const sql = readFileSync(filepath, "utf8");
+    await pool.query(sql);
+  } catch (error) {
+    console.error("An error has occurred when created database:", error);
+  }
 };
 
 export { setupdb };
