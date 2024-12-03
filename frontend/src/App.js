@@ -4,6 +4,7 @@ import Logo from "./components/Logo"
 import SearchBar from './components/SearchBar';
 
 function App() {
+    // this is a test comment
     return (
         <div className='App'>
             <div className="SearchBoxContainer">
