@@ -9,7 +9,7 @@
     padding: 0 15px;
 }
 
-input {
+.input-wrapper > input {
     background-color: transparent;
     border: none;
     font-size: 1.25rem;
@@ -17,6 +17,29 @@ input {
     width: 100%;
 }
 
-input:focus {
+.input-wrapper > input:focus {
     outline: none;
+}
+
+.dbtoggles {
+    display: block;
+    width: 100%;
+    margin: 16px;
+    clear: left;
+}
+
+.toggle-radio {
+    padding-left: 8px;
+    padding-right: 4px;
+}
+
+.toggle-dropdown {
+    margin-left: 32px;
+    margin-right: 8px;
+    width: 160px;
+    overflow: scroll;
+}
+
+.searchbarcontainer {
+    width: 100%;
 }
