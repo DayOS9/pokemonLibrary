@@ -37,9 +37,9 @@ function SearchBar() {
         {value: "white", label: "White"},
     ];
     const GENERATIONS = [
-        {value: "1", label: "Generation I"},
-        {value: "2", label: "Generation II"},
-        {value: "3", label: "Generation III"},
+        {value: "gen1", label: "Generation I"},
+        {value: "gen2", label: "Generation II"},
+        {value: "gen3", label: "Generation III"},
     ];
     const ABILITIES = [
         {value: "blaze", label: "Blaze"},
