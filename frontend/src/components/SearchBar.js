@@ -45,46 +45,13 @@ function SearchBar() {
         {value: "blaze", label: "Blaze"},
         {value: "torrent", label: "Torrent"},
         {value: "overgrow", label: "Overgrow"},
-        {value: "overgrow", label: "Overgrow"},
-        {value: "overgrow", label: "Overgrow"},
-        {value: "overgrow", label: "Overgrow"},
-        {value: "overgrow", label: "Overgrow"},
-        {value: "overgrow", label: "Overgrow"},
-        {value: "overgrow", label: "Overgrow"},
-        {value: "overgrow", label: "Overgrow"},
-        {value: "overgrow", label: "Overgrow"},
-        {value: "overgrow", label: "Overgrow"},
-        {value: "overgrow", label: "Overgrow"},
-        {value: "overgrow", label: "Overgrow"},
-        {value: "overgrow", label: "Overgrow"},
-        {value: "overgrow", label: "Overgrow"},
-        {value: "overgrow", label: "Overgrow"},
-        {value: "overgrow", label: "Overgrow"},
-        {value: "overgrow", label: "Overgrow"},
-        {value: "overgrow", label: "Overgrow"},
-        {value: "overgrow", label: "Overgrow"},
-        {value: "overgrow", label: "Overgrow"},
-        {value: "overgrow", label: "Overgrow"},
-        {value: "overgrow", label: "Overgrow"},
-        {value: "overgrow", label: "Overgrow"},
-        {value: "overgrow", label: "Overgrow"},
-        {value: "overgrow", label: "Overgrow"},
-        {value: "overgrow", label: "Overgrow"},
-        {value: "overgrow", label: "Overgrow"},
-        {value: "overgrow", label: "Overgrow"},
-        {value: "overgrow", label: "Overgrow"},
-        {value: "overgrow", label: "Overgrow"},
-        {value: "overgrow", label: "Overgrow"},
-        {value: "overgrow", label: "Overgrow"},
-        {value: "overgrow", label: "Overgrow"},
-        {value: "overgrow", label: "Overgrow"},
     ];
 
     const [myRadio, setMyRadio] = useState("all");
-    const [myType, setMyType] = useState("");
-    const [myColor, setMyColor] = useState("");
-    const [myGeneration, setMyGeneration] = useState("");
-    const [myAbility, setMyAbility] = useState("");
+    const [myType, setMyType] = useState("all");
+    const [myColor, setMyColor] = useState("all");
+    const [myGeneration, setMyGeneration] = useState("all");
+    const [myAbility, setMyAbility] = useState("all");
 
     const [input, setInput] = useState("");
     const [results, setResults] = useState([]);
@@ -110,37 +77,57 @@ function SearchBar() {
         fetchData(value);
     };
 
+    const handleRadio = (e) => {
+        setMyRadio(e.target.value);
+    }
+
+    const handleType = (e) => {
+        setMyType(e.target.value);
+    }
+
+    const handleColor = (e) => {
+        setMyColor(e.target.value);
+    }
+    
+    const handleGeneration = (e) => {
+        setMyGeneration(e.target.value);
+    }
+    
+    const handleAbility = (e) => {
+        setMyAbility(e.target.value);
+    }
+    
     return (
         <div className="searchbarcontainer">
             <div className="dbtoggles">
-                <label for="toggleall" className="toggle-radio">All Pokemon</label>
-                <input type="radio" className="toggle-radio" name="toggle-radio" id="toggleall" value="all" checked/>
+                <label htmlFor="toggleall" className="toggle-radio">All Pokemon</label>
+                <input type="radio" className="toggle-radio" name="toggle-radio" id="toggleall" value="all" onChange={handleRadio} defaultChecked/>
 
-                <label for="togglefavorites" className="toggle-radio">Only Favorites</label>
-                <input type="radio" className="toggle-radio" name="toggle-radio" id="togglefavorites" value="favorites"/>
+                <label htmlFor="togglefavorites" className="toggle-radio">Only Favorites</label>
+                <input type="radio" className="toggle-radio" name="toggle-radio" id="togglefavorites" value="favorites" onChange={handleRadio}/>
 
-                <select className="toggle-dropdown" id="toggletype">
-                    <option value="" selected disabled hidden>Filter By Type</option>
-                    <option value="">All Types</option>
-                    {TYPES.map(({value, label}) => <option value={value}>{label}</option>)}
+                <select className="toggle-dropdown" id="toggletype" defaultValue={"all"} onChange={handleType}>
+                    <option value="all" disabled hidden>Filter By Type</option>
+                    <option value="all">All Types</option>
+                    {TYPES.map(({value, label}) => <option key={value} value={value}>{label}</option>)}
                 </select>
 
-                <select className="toggle-dropdown" id="togglecolor">
-                    <option value="" selected disabled hidden>Filter By Color</option>
-                    <option value="">All Colors</option>
-                    {COLORS.map(({value, label}) => <option value={value}>{label}</option>)}
+                <select className="toggle-dropdown" id="togglecolor" defaultValue={"all"} onChange={handleColor}>
+                    <option value="all" disabled hidden>Filter By Color</option>
+                    <option value="all">All Colors</option>
+                    {COLORS.map(({value, label}) => <option key={value} value={value}>{label}</option>)}
                 </select>
 
-                <select className="toggle-dropdown" id="togglegeneration">
-                    <option value="" selected disabled hidden>Filter By Generation</option>
-                    <option value="">All Generations</option>
-                    {GENERATIONS.map(({value, label}) => <option value={value}>{label}</option>)}
+                <select className="toggle-dropdown" id="togglegeneration" defaultValue={"all"} onChange={handleGeneration}>
+                    <option value="all" disabled hidden>Filter By Generation</option>
+                    <option value="all">All Generations</option>
+                    {GENERATIONS.map(({value, label}) => <option key={value} value={value}>{label}</option>)}
                 </select>
 
-                <select className="toggle-dropdown" id="toggleability">
-                    <option value="" selected disabled hidden>Filter By Ability</option>
-                    <option value="">All Abilities</option>
-                    {ABILITIES.map(({value, label}) => <option value={value}>{label}</option>)}
+                <select className="toggle-dropdown" id="toggleability" defaultValue={"all"} onChange={handleAbility}>
+                    <option value="all" disabled hidden>Filter By Ability</option>
+                    <option value="all">All Abilities</option>
+                    {ABILITIES.map(({value, label}) => <option key={value} value={value}>{label}</option>)}
                 </select>
             </div>
 
@@ -149,6 +136,7 @@ function SearchBar() {
             </div>
 
             {results && results.length > 0 && <SearchResultsList results={results} />}
+
             {myRadio && <h1>{myRadio}</h1>}
             {myType && <h1>{myType}</h1>}
             {myColor && <h1>{myColor}</h1>}
