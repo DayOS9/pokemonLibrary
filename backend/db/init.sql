@@ -4,6 +4,7 @@ DROP TABLE IF EXISTS color;
 DROP TABLE IF EXISTS generation;
 DROP TABLE IF EXISTS ability;
 DROP TABLE IF EXISTS typing;*/
+DROP TABLE IF EXISTS favorites;
 
 CREATE TABLE IF NOT EXISTS typing (
     t_primarytype text PRIMARY KEY,
@@ -39,8 +40,11 @@ CREATE TABLE IF NOT EXISTS pokemon (
     t_primarytype text REFERENCES typing(t_primarytype),
     a_primaryability text REFERENCES ability(a_primaryability),
     g_generationname text REFERENCES generation(g_generationname),
-    c_colorname text REFERENCES color(c_colorname)
+    c_colorname text REFERENCES color(c_colorname),
+    nickname text
 );
+
+CREATE TABLE IF NOT EXISTS favorites AS TABLE pokemon WITH NO DATA;
 
 INSERT INTO typing (t_primarytype, t_list)
 VALUES
