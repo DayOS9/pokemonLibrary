@@ -1,3 +1,7 @@
+html {
+    background-color: #eee;
+}
+
 .Header {
     font-weight: bold;
     padding: 0.4rem;
@@ -9,6 +13,9 @@
     background-color: #eee;
     height: 100vh;
     width: 100vw;
+    padding-left: 100px;
+    padding-right: 100px;
+    margin-bottom: 100px;
 }
 
 .SearchBoxContainer {
@@ -17,4 +24,29 @@
     flex-direction: row;
     align-items: start;
     min-width: 200px;
+    max-height: 320px;
+}
+
+.DisplayContainer {
+    margin: auto;
+    margin-top: 32px;
+    padding: 32px;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    min-width: 200px;
+}
+
+.Footer {
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    min-width: 200px;
+    max-height: 320px;
+    font-weight: bold;
+    padding: 0.4rem;
+    justify-content: center;
+    text-align: center;
 }

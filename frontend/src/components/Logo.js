@@ -3,7 +3,7 @@ import logo from "./images/pokeball.png"
 
 function Logo() {
     return (
-        <img src={logo} alt="Pokeball img" height={200} width={200} />
+        <img src={logo} alt="Pokeball img" height={160} width={160} />
     )
 }
 
