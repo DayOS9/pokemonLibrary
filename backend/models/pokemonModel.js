@@ -67,6 +67,49 @@ const getAllPokemon = async () => {
   return result.rows;
 };
 
+const addPokemonIdFavorites = async (id) => {
+  await pool.query(
+    "INSERT INTO favorites SELECT * FROM pokemon WHERE dexid = $1",
+    [id],
+  );
+};
+
+const addPokemonNameFavorites = async (name) => {
+  await pool.query(
+    "INSERT INTO favorites SELECT * FROM pokemon WHERE dexname = $1",
+    [name],
+  );
+};
+
+const deletePokemonIdFavorites = async (id) => {
+  await pool.query("DELETE FROM favorites WHERE dexid = $1", [id]);
+};
+
+const deletePokemonNameFavorites = async (name) => {
+  await pool.query("DELETE FROM favorites WHERE dexname = $1", [name]);
+};
+
+const updatePokemonNickNameIdFavorites = async (id, nickname) => {
+  const result = await pool.query(
+    "UPDATE favorites SET nickname = $2 WHERE dexid = $1 RETURNING *",
+    [id, nickname],
+  );
+  return result.rows[0];
+};
+
+const updatePokemonNickNameNameFavorites = async (name, nickname) => {
+  const result = await pool.query(
+    "UPDATE favorites SET nickname = $2 WHERE dexname = $1 RETURNING *",
+    [name, nickname],
+  );
+  return result.rows[0];
+};
+
+const getAllPokemonFavorites = async () => {
+  const result = await pool.query("SELECT * FROM favorites");
+  return result.rows;
+};
+
 export {
   getPokemonById,
   getPokemonByName,
@@ -75,4 +118,11 @@ export {
   getPokemonByGeneration,
   getPokemonByColor,
   getAllPokemon,
+  addPokemonIdFavorites,
+  addPokemonNameFavorites,
+  deletePokemonIdFavorites,
+  deletePokemonNameFavorites,
+  updatePokemonNickNameIdFavorites,
+  updatePokemonNickNameNameFavorites,
+  getAllPokemonFavorites,
 };

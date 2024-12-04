@@ -6,6 +6,13 @@ import {
   getPokemonByName,
   getPokemonById,
   getAllPokemon,
+  addPokemonIdFavorites,
+  addPokemonNameFavorites,
+  deletePokemonIdFavorites,
+  deletePokemonNameFavorites,
+  updatePokemonNickNameIdFavorites,
+  updatePokemonNickNameNameFavorites,
+  getAllPokemonFavorites,
 } from "../models/pokemonModel.js";
 
 const getByColor = async (req, res) => {
@@ -108,6 +115,90 @@ const getAll = async (req, res) => {
   }
 };
 
+const addByIdFav = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    await addPokemonIdFavorites(id);
+    res.status(201).json({ message: "Pokemon added successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to add pokemon" });
+  }
+};
+
+const addByNameFav = async (req, res) => {
+  const { name } = req.params;
+
+  try {
+    await addPokemonNameFavorites(name);
+    res.status(201).json({ message: "Pokemon added successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to add pokemon" });
+  }
+};
+
+const deleteByIdFav = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    await deletePokemonIdFavorites(id);
+    res.status(201).json({ message: "Pokemon deleted successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to delete pokemon" });
+  }
+};
+
+const deleteByNameFav = async (req, res) => {
+  const { name } = req.params;
+
+  try {
+    await deletePokemonNameFavorites(name);
+    res.status(201).json({ message: "Pokemon deleted successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to delete pokemon" });
+  }
+};
+
+const updateNickNameByIdFav = async (req, res) => {
+  const { id } = req.params;
+  const { nickname } = req.body;
+
+  try {
+    const result = await updatePokemonNickNameIdFavorites(id, nickname);
+    res.json(result);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to update pokemon nickname" });
+  }
+};
+
+const updateNickNameByNameFav = async (req, res) => {
+  const { name } = req.params;
+  const { nickname } = req.body;
+
+  try {
+    const result = await updatePokemonNickNameNameFavorites(name, nickname);
+    res.json(result);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to update pokemon nickname" });
+  }
+};
+
+const getAllFavorites = async (req, res) => {
+  try {
+    const pokemon = await getAllPokemonFavorites();
+    res.json(pokemon);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
 export {
   getById,
   getByName,
@@ -116,4 +207,11 @@ export {
   getByAbility,
   getByGeneration,
   getAll,
+  addByIdFav,
+  addByNameFav,
+  deleteByIdFav,
+  deleteByNameFav,
+  updateNickNameByIdFav,
+  updateNickNameByNameFav,
+  getAllFavorites,
 };
