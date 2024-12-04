@@ -14,6 +14,12 @@ import {
   updateNickNameByIdFav,
   updateNickNameByNameFav,
   getAllFavorites,
+  getFavoriteById,
+  getFavoriteByName,
+  getFavoriteByType,
+  getFavoriteByColor,
+  getFavoriteByAbility,
+  getFavoriteByGeneration,
 } from "../controllers/pokemonController.js";
 const router = express.Router();
 
@@ -28,6 +34,21 @@ router.post("/pokemon/name/:name/add/favorites", addByNameFav);
 router.delete("/pokemon/id/:id/delete/favorites", deleteByIdFav);
 
 router.delete("/pokemon/name/:name/delete/favorites", deleteByNameFav);
+
+router.get("/pokemon/id/:id/favorites", getFavoriteById);
+
+router.get("/pokemon/name/:name/favorites", getFavoriteByName);
+
+router.get("/pokemon/type/:type/favorites", getFavoriteByType);
+
+router.get("/pokemon/color/:color/favorites", getFavoriteByColor);
+
+router.get("/pokemon/ability/:ability/favorites", getFavoriteByAbility);
+
+router.get(
+  "/pokemon/generation/:generation/favorites",
+  getFavoriteByGeneration,
+);
 
 router.get("/pokemon/id/:id", getById);
 
