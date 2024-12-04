@@ -39,6 +39,9 @@ html {
 }
 
 .Footer {
+    width: 100%;
+    background-color: #0A285F;
+    color: white;
     margin: auto;
     display: flex;
     flex-direction: row;

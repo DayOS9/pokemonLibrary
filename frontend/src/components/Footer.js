@@ -1,15 +1,32 @@
 import React from "react";
+import footerLogo from "./images/footerLogo.png"
 
 function Footer() {
     return (
-        <footer >
-            <h1>footer</h1>
-            <h1>blankspace for now</h1>
-            <h1>eventually replace this</h1>
-            <h1>with a bunch</h1>
-            <h1>of various links</h1>
-            <h1>that link to project assignment details</h1>
-            <h1>and then delete this sample text</h1>
+        <footer>
+            <div>
+                <img
+                    src={footerLogo}
+                    alt="Pokémon Footer Logo"
+                    style={{width: "200px", marginBottom: "10px"}}
+                />
+            </div>
+            <p>Pokémon Library Final Project © 2024</p>
+            <nav>
+                <ul style={{
+                    listStyleType: 'none',
+                    padding: 0,
+                    margin: '10px',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    gap: '20px'
+                }}>
+                    <li><a href="https://github.com/DayOS9/pokemonLibrary" target="_blank" rel="noopener noreferrer" style={{color: '#FFF', fontWeight: 'normal'}} >Assignment Details</a></li>
+                    <li><a href="https://pokeapi.co" target="_blank" rel="noopener noreferrer" style={{ color: '#FFF', fontWeight: 'normal'}}>Pokémon API</a></li>
+                    <li><a href="https://docs.google.com/document/d/1yXNXHCdsTkwSddZ8jh40-3zgl2BQqaBiK-Oqq5s6WXQ/edit?usp=sharing" target="_blank" rel="noopener noreferrer" style={{ color: '#FFF', fontWeight: 'normal'}}>About Project</a></li>
+                    <li><a href="https://docs.google.com/document/d/1xw23eNMznudguenz-clG8soGOxGYiNCTnWinzhHwpFw/edit?usp=sharing" target="_blank" rel="noopener noreferrer" style={{ color: '#FFF', fontWeight: 'normal'}}>Contact Us</a></li>
+                </ul>
+            </nav>
         </footer>
     )
 }
