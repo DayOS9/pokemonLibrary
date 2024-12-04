@@ -5,6 +5,7 @@ import {
   getPokemonByType,
   getPokemonByName,
   getPokemonById,
+  getAllPokemon,
 } from "../models/pokemonModel.js";
 
 const getByColor = async (req, res) => {
@@ -93,6 +94,19 @@ const getById = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+const getAll = async (req, res) => {
+  try {
+    const pokemon = await getAllPokemon();
+    if (pokemon.length > 0) {
+      res.json(pokemon);
+    } else {
+      res.status(404).json({ error: "Unable to grab all pokemon" });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
 
 export {
   getById,
@@ -101,4 +115,5 @@ export {
   getByColor,
   getByAbility,
   getByGeneration,
+  getAll,
 };

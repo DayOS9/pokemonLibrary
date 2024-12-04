@@ -62,6 +62,11 @@ const getPokemonByColor = async (color) => {
   }
 };
 
+const getAllPokemon = async () => {
+  const result = await pool.query("SELECT * FROM pokemon");
+  return result.rows;
+};
+
 export {
   getPokemonById,
   getPokemonByName,
@@ -69,4 +74,5 @@ export {
   getPokemonByAbility,
   getPokemonByGeneration,
   getPokemonByColor,
+  getAllPokemon,
 };
