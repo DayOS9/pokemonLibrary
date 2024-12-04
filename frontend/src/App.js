@@ -40,7 +40,7 @@ function App() {
                         <Logo />
                         <Header />
                     </div>
-                    <SearchBar />
+                    <SearchBar setDisplayPokemon={setDisplayPokemon} />
                 </div>
                 <div className="DisplayContainer">
                     <div className="displayimg">
