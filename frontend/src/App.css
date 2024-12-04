@@ -33,7 +33,7 @@ html {
     padding: 32px;
     display:flex;
     flex-direction: row;
-    align-items: start;
+    align-items: center;
     justify-content: space-evenly;
     min-width: 200px;
 }
