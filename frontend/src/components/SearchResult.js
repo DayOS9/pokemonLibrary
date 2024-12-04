@@ -1,13 +1,13 @@
 import "./SearchResult.css";
 
-export const SearchResult = ({ rid, rname }) => {
+export const SearchResult = ({ result }) => {
     const handleClick = (e) => {
-        alert(`You selected ${rid} , ${rname}!`);
+        alert(`You selected ${result.id} , ${result.name}!`);
     }
 
     return (
         <div className="search-result" onClick={handleClick}>
-            {`${rid}: ${rname}`}
+            {`${result.id}: ${result.name}`}
         </div>
     );
 };

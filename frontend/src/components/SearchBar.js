@@ -48,6 +48,8 @@ function SearchBar() {
     ];
 
     const [myRadio, setMyRadio] = useState("all");
+    const [myDropdown, setMyDropdown] = useState("");
+
     const [myType, setMyType] = useState("all");
     const [myColor, setMyColor] = useState("all");
     const [myGeneration, setMyGeneration] = useState("all");
@@ -81,6 +83,14 @@ function SearchBar() {
         setMyRadio(e.target.value);
     }
 
+    const handleDropdown = (e) => {
+        setMyDropdown(e.target.value);
+        setMyType("all");
+        setMyColor("all");
+        setMyGeneration("all");
+        setMyAbility("all");
+    }
+
     const handleType = (e) => {
         setMyType(e.target.value);
     }
@@ -106,29 +116,44 @@ function SearchBar() {
                 <label htmlFor="togglefavorites" className="toggle-radio">Only Favorites</label>
                 <input type="radio" className="toggle-radio" name="toggle-radio" id="togglefavorites" value="favorites" onChange={handleRadio}/>
 
-                <select className="toggle-dropdown" id="toggletype" defaultValue={"all"} onChange={handleType}>
-                    <option value="all" disabled hidden>Filter By Type</option>
+                <label htmlFor="togglenone" className="toggle-radio" style={{paddingLeft: "64px"}}>No Filters</label>
+                <input type="radio" className="toggle-radio" name="toggle-dropdown" id="togglenone" value="" onChange={handleDropdown} defaultChecked/>
+
+                <label htmlFor="toggletype" className="toggle-radio">Type Filter</label>
+                <input type="radio" className="toggle-radio" name="toggle-dropdown" id="toggletype" value="type" onChange={handleDropdown}/>
+
+                <label htmlFor="togglecolor" className="toggle-radio">Color Filter</label>
+                <input type="radio" className="toggle-radio" name="toggle-dropdown" id="togglecolor" value="color" onChange={handleDropdown}/>
+
+                <label htmlFor="togglegeneration" className="toggle-radio">Generation Filter</label>
+                <input type="radio" className="toggle-radio" name="toggle-dropdown" id="togglegeneration" value="generation" onChange={handleDropdown}/>
+
+                <label htmlFor="toggleability" className="toggle-radio">Ability Filter</label>
+                <input type="radio" className="toggle-radio" name="toggle-dropdown" id="toggleability" value="ability" onChange={handleDropdown}/>
+
+                {myDropdown === "type" && (
+                <select className="toggle-dropdown" id="toggledropdown" defaultValue={"all"} onChange={handleType}>
                     <option value="all">All Types</option>
                     {TYPES.map(({value, label}) => <option key={value} value={value}>{label}</option>)}
-                </select>
+                </select>)}
 
-                <select className="toggle-dropdown" id="togglecolor" defaultValue={"all"} onChange={handleColor}>
-                    <option value="all" disabled hidden>Filter By Color</option>
+                {myDropdown === "color" && (
+                <select className="toggle-dropdown" id="toggledropdown" defaultValue={"all"} onChange={handleColor}>
                     <option value="all">All Colors</option>
                     {COLORS.map(({value, label}) => <option key={value} value={value}>{label}</option>)}
-                </select>
+                </select>)}
 
-                <select className="toggle-dropdown" id="togglegeneration" defaultValue={"all"} onChange={handleGeneration}>
-                    <option value="all" disabled hidden>Filter By Generation</option>
+                {myDropdown === "generation" && (
+                <select className="toggle-dropdown" id="toggledropdown" defaultValue={"all"} onChange={handleGeneration}>
                     <option value="all">All Generations</option>
                     {GENERATIONS.map(({value, label}) => <option key={value} value={value}>{label}</option>)}
-                </select>
+                </select>)}
 
-                <select className="toggle-dropdown" id="toggleability" defaultValue={"all"} onChange={handleAbility}>
-                    <option value="all" disabled hidden>Filter By Ability</option>
+                {myDropdown === "ability" && (
+                <select className="toggle-dropdown" id="toggledropdown" defaultValue={"all"} onChange={handleAbility}>
                     <option value="all">All Abilities</option>
                     {ABILITIES.map(({value, label}) => <option key={value} value={value}>{label}</option>)}
-                </select>
+                </select>)}
             </div>
 
             <div className="input-wrapper">
@@ -138,10 +163,13 @@ function SearchBar() {
             {results && results.length > 0 && <SearchResultsList results={results} />}
 
             {myRadio && <h1>{myRadio}</h1>}
-            {myType && <h1>{myType}</h1>}
-            {myColor && <h1>{myColor}</h1>}
-            {myGeneration && <h1>{myGeneration}</h1>}
-            {myAbility && <h1>{myAbility}</h1>}
+            {myDropdown && <h1>{myDropdown}</h1>}
+
+            {!myDropdown && <h1>myDropdown is null</h1>}
+            {myDropdown === "type" && myType && <h1>{myType}</h1>}
+            {myDropdown === "color" && myColor && <h1>{myColor}</h1>}
+            {myDropdown === "generation" && myGeneration && <h1>{myGeneration}</h1>}
+            {myDropdown === "ability" && myAbility && <h1>{myAbility}</h1>}
         </div>
     )
 };
