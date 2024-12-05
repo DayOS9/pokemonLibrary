@@ -5,7 +5,7 @@ import { getPokemon } from "./db/pokemonInsert.js";
 import { router } from "./routes/pokemonRoutes.js";
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 //middleware
 app.use(cors());
@@ -15,7 +15,7 @@ app.use(json());
 const initializeDatabase = async () => {
   try {
     await setupdb();
-    console.log("Database setup complete.");
+    console.log("Database setup complete. Transferring Pokemon data to the database.");
 
     await getPokemon();
     console.log("All done getting pokemon into the database.");

@@ -2,7 +2,6 @@ import "./SearchResult.css";
 
 export const SearchResult = ({ result, setDisplayPokemon }) => {
     const handleClick = (e) => {
-        alert(`You selected ${result.id} , ${result.name}!`);
         setDisplayPokemon({
             id:result.id, 
             name:result.name, 
