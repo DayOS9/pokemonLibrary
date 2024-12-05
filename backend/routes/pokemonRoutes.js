@@ -20,7 +20,12 @@ import {
   getFavoriteByColor,
   getFavoriteByAbility,
   getFavoriteByGeneration,
+  types,
+  colors,
+  abilities,
+  generations,
 } from "../controllers/pokemonController.js";
+import { types } from "pg";
 const router = express.Router();
 
 router.patch("/pokemon/id/:id/nickname", updateNickNameByIdFav);
@@ -65,5 +70,13 @@ router.get("/pokemon/generation/:generation", getByGeneration);
 router.get("/pokemon/all/favorites", getAllFavorites);
 
 router.get("/pokemon/all", getAll);
+
+router.get("/pokemon/type", types);
+
+router.get("/pokemon/color", colors);
+
+router.get("/pokemon/ability", abilities);
+
+router.get("/pokemon/generation", generations);
 
 export { router };
