@@ -5,7 +5,7 @@ import { SearchResultsList } from "./SearchResultsList";
 import "./SearchBar.css"
 
 function SearchBar({ setDisplayPokemon }) {
-    const TYPES = [
+    const [TYPES, setTYPES] = useState([
         {value: "normal", label: "Normal"},
         {value: "fighting", label: "Fighting"},
         {value: "flying", label: "Flying"},
@@ -23,8 +23,8 @@ function SearchBar({ setDisplayPokemon }) {
         {value: "ice", label: "Ice"},
         {value: "dragon", label: "Dragon"},
         {value: "dark", label: "Dark"},
-    ];
-    const COLORS = [
+    ]);
+    const [COLORS, setCOLORS] = useState([
         {value: "red", label: "Red"},
         {value: "yellow", label: "Yellow"},
         {value: "green", label: "Green"},
@@ -35,17 +35,17 @@ function SearchBar({ setDisplayPokemon }) {
         {value: "black", label: "Black"},
         {value: "gray", label: "Gray"},
         {value: "white", label: "White"},
-    ];
-    const GENERATIONS = [
+    ]);
+    const [GENERATIONS, setGENERATIONS] = useState([
         {value: "gen1", label: "Generation I"},
         {value: "gen2", label: "Generation II"},
         {value: "gen3", label: "Generation III"},
-    ];
-    const ABILITIES = [
+    ]);
+    const [ABILITIES, setABILITIES] = useState([
         {value: "blaze", label: "Blaze"},
         {value: "torrent", label: "Torrent"},
         {value: "overgrow", label: "Overgrow"},
-    ];
+    ]);
 
     const [myRadio, setMyRadio] = useState("all");
     const [myDropdown, setMyDropdown] = useState("");
@@ -59,15 +59,15 @@ function SearchBar({ setDisplayPokemon }) {
     const [results, setResults] = useState([]);
 
     const fetchData = (value) => {
-        fetch("https://jsonplaceholder.typicode.com/users")
+        fetch("/api/pokemon/all")
         .then((response) => response.json())
         .then((json) => {
             const results = json.filter((user) => {
                 return (
                     value &&
                     user &&
-                    user.name &&
-                    user.name.toLowerCase().includes(value)
+                    user.dexname &&
+                    user.dexname.toLowerCase().includes(value)
                 );
             });
             setResults(results);

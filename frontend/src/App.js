@@ -10,25 +10,6 @@ import Footer from "./components/Footer"
 import defpokemon from "./components/images/defpokemon.png"
 
 function App() {
-    const TEMPSTATS = {
-        hp: 1,
-        att: 2,
-        def: 3,
-        spatt: 4,
-        spdef: 5,
-        spd: 6
-    };
-    const SAMPLEPOKEMON = {
-       id:0, 
-       name:"sample-display", 
-       nickname:"", 
-       stats:TEMPSTATS, 
-       type:"normal", 
-       color:"white", 
-       generation:"gen1", 
-       ability:"run-away"
-    };
-
     // const [displayPokemon, setDisplayPokemon] = useState(SAMPLEPOKEMON);
     const [displayPokemon, setDisplayPokemon] = useState();
 
@@ -44,7 +25,11 @@ function App() {
                 </div>
                 <div className="DisplayContainer">
                     <div className="displayimg">
-                        <img src={defpokemon} alt="Default Pokemon img" height={400} width={400} />
+                        {displayPokemon ? (
+                            <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${displayPokemon.id}.png`} alt={`${displayPokemon.name}`} height={400} width={400} />
+                        ) : (
+                            <img src={defpokemon} alt="Default Pokemon img" height={400} width={400} />
+                        )}
                     </div>
 
                     <div className="displaystats">
@@ -54,17 +39,19 @@ function App() {
                                     (<h1>{`${displayPokemon.id}: ${displayPokemon.name} (${displayPokemon.nickname})`}</h1>) :
                                     (<h1>{`${displayPokemon.id}: ${displayPokemon.name}`}</h1>)
                                 }
-                                <h1>Stats</h1>
-                                <h2>{`HP: ${displayPokemon.stats.hp}`}</h2>
-                                <h2>{`ATT: ${displayPokemon.stats.att}`}</h2>
-                                <h2>{`DEF: ${displayPokemon.stats.def}`}</h2>
-                                <h2>{`SP-ATT: ${displayPokemon.stats.spatt}`}</h2>
-                                <h2>{`SP-DEF: ${displayPokemon.stats.spdef}`}</h2>
-                                <h2>{`SPEED: ${displayPokemon.stats.spd}`}</h2>
-                                <h1>{`Type: ${displayPokemon.type}`}</h1>
-                                <h1>{`Color: ${displayPokemon.color}`}</h1>
-                                <h1>{`Generation: ${displayPokemon.generation}`}</h1>
-                                <h1>{`Ability: ${displayPokemon.ability}`}</h1>
+                                <h2>Stats:</h2>
+                                <h3>{`HP: ${displayPokemon.stats.hp}`}</h3>
+                                <h3>{`ATT: ${displayPokemon.stats.att}`}</h3>
+                                <h3>{`DEF: ${displayPokemon.stats.def}`}</h3>
+                                <h3>{`SP-ATT: ${displayPokemon.stats.spatt}`}</h3>
+                                <h3>{`SP-DEF: ${displayPokemon.stats.spdef}`}</h3>
+                                <h3>{`SPEED: ${displayPokemon.stats.spd}`}</h3>
+                                <h3>{`WEIGHT: ${displayPokemon.stats.weight}`}</h3>
+                                <h3>{`HEIGHT: ${displayPokemon.stats.height}`}</h3>
+                                <h2>{`Type: ${displayPokemon.type}`}</h2>
+                                <h2>{`Color: ${displayPokemon.color}`}</h2>
+                                <h2>{`Generation: ${displayPokemon.generation}`}</h2>
+                                <h2>{`Ability: ${displayPokemon.ability}`}</h2>
                             </>
                         ) : (
                             <h1>Search for a Pokemon<br/>to learn more about it!</h1>
