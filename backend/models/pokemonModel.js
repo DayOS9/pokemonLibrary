@@ -157,6 +157,26 @@ const getFavoritePokemonByColor = async (color) => {
   return result.rows;
 };
 
+const getTypes = async () => {
+  const result = await pool.query("SELECT t_primarytype FROM typing ");
+  return result.rows;
+};
+
+const getAbilities = async () => {
+  const result = await pool.query("SELECT a_primaryability FROM ability ");
+  return result.rows;
+};
+
+const getGenerations = async () => {
+  const result = await pool.query("SELECT g_generationname FROM generation");
+  return result.rows;
+};
+
+const getColors = async () => {
+  const result = await pool.query("SELECT c_colorname FROM color");
+  return result.rows;
+};
+
 export {
   getPokemonById,
   getPokemonByName,
@@ -178,4 +198,8 @@ export {
   getFavoritePokemonByAbility,
   getFavoritePokemonByGeneration,
   getFavoritePokemonByColor,
+  getTypes,
+  getAbilities,
+  getGenerations,
+  getColors,
 };

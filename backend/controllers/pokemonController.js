@@ -19,6 +19,10 @@ import {
   getFavoritePokemonByType,
   getFavoritePokemonByName,
   getFavoritePokemonById,
+  getTypes,
+  getAbilities,
+  getGenerations,
+  getColors,
 } from "../models/pokemonModel.js";
 
 const getByColor = async (req, res) => {
@@ -84,11 +88,7 @@ const getById = async (req, res) => {
 const getAll = async (req, res) => {
   try {
     const pokemon = await getAllPokemon();
-    if (pokemon.length > 0) {
-      res.json(pokemon);
-    } else {
-      res.status(404).json({ error: "Unable to grab all pokemon" });
-    }
+    res.json(pokemon);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Internal Server Error" });
@@ -240,6 +240,46 @@ const getFavoriteById = async (req, res) => {
   }
 };
 
+const types = async (req, res) => {
+  try {
+    const pokemon = await getTypes();
+    res.json(pokemon);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+const abilities = async (req, res) => {
+  try {
+    const pokemon = await getAbilities();
+    res.json(pokemon);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+const generations = async (req, res) => {
+  try {
+    const pokemon = await getGenerations();
+    res.json(pokemon);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+const colors = async (req, res) => {
+  try {
+    const pokemon = await getColors();
+    res.json(pokemon);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
 export {
   getById,
   getByName,
@@ -261,4 +301,8 @@ export {
   getFavoriteByColor,
   getFavoriteByAbility,
   getFavoriteByGeneration,
+  types,
+  abilities,
+  generations,
+  colors,
 };
