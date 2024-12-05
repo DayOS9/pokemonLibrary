@@ -12,6 +12,48 @@ import defpokemon from "./components/images/defpokemon.png"
 function App() {
     const [displayPokemon, setDisplayPokemon] = useState();
 
+    const [myRadio, setMyRadio] = useState("all");
+    const [myDropdown, setMyDropdown] = useState("");
+    
+    const [input, setInput] = useState("");
+    const [results, setResults] = useState([]);
+
+    const [feedback, setFeedback] = useState("");
+
+    const handleFavorite = (e) => {
+        console.log(displayPokemon);
+        fetch(`/api/pokemon/id/${displayPokemon.id}/add/favorites`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then((response) => response.json())
+        .then((json) => {
+            console.log(json);
+            setFeedback(json.message);
+            setInput("");
+            setResults([]);
+        });
+    }
+
+    const handleUnfavorite = (e) => {
+        console.log(displayPokemon);
+        fetch(`/api/pokemon/id/${displayPokemon.id}/delete/favorites`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then((response) => response.json())
+        .then((json) => {
+            console.log(json);
+            setFeedback(json.message);
+            setInput("");
+            setResults([]);
+        });
+    }
+
     return (
         <>
             <div className='App'>
@@ -20,7 +62,15 @@ function App() {
                         <Logo />
                         <Header />
                     </div>
-                    <SearchBar setDisplayPokemon={setDisplayPokemon} />
+                    <SearchBar 
+                        setDisplayPokemon={setDisplayPokemon} 
+                        myRadio={myRadio} myDropdown={myDropdown} 
+                        input={input} results={results} 
+                        setMyRadio={setMyRadio} 
+                        setMyDropdown={setMyDropdown} 
+                        setInput={setInput} 
+                        setResults={setResults} 
+                    />
                 </div>
                 <div className="DisplayContainer">
                     <div className="displayimg">
@@ -57,6 +107,16 @@ function App() {
                         )}
                     </div>
                 </div>
+
+                {displayPokemon ? (
+                    <>
+                        <div className="FavoritesOptions">
+                            <button onClick={handleFavorite}>Favorite Pokemon</button>
+                            <button onClick={handleUnfavorite}>Unfavorite Pokemon</button>
+                        </div>
+                        <h3 style={{textAlign: "center"}}>{feedback}</h3>
+                    </>
+                ) : (<div></div>)}
             </div>
             <div className="Footer">
                 <Footer />

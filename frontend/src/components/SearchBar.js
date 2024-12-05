@@ -4,7 +4,7 @@ import { SearchResultsList } from "./SearchResultsList";
 
 import "./SearchBar.css"
 
-function SearchBar({ setDisplayPokemon }) {
+function SearchBar({ setDisplayPokemon, myRadio, myDropdown, input, results, setMyRadio, setMyDropdown, setInput, setResults }) {
     const [TYPES, setTYPES] = useState([
         {value: "normal", label: "Normal"},
         {value: "fighting", label: "Fighting"},
@@ -47,16 +47,10 @@ function SearchBar({ setDisplayPokemon }) {
         {value: "overgrow", label: "Overgrow"},
     ]);
 
-    const [myRadio, setMyRadio] = useState("all");
-    const [myDropdown, setMyDropdown] = useState("");
-
     const [myType, setMyType] = useState("all");
     const [myColor, setMyColor] = useState("all");
     const [myGeneration, setMyGeneration] = useState("all");
     const [myAbility, setMyAbility] = useState("all");
-
-    const [input, setInput] = useState("");
-    const [results, setResults] = useState([]);
 
     const fetchData = (value) => {
         if (myRadio === "all") { 
@@ -103,6 +97,8 @@ function SearchBar({ setDisplayPokemon }) {
 
     const handleRadio = (e) => {
         setMyRadio(e.target.value);
+        setInput("");
+        setResults([]);
     }
 
     const handleDropdown = (e) => {
@@ -184,15 +180,6 @@ function SearchBar({ setDisplayPokemon }) {
 
             {results && results.length > 0 && <SearchResultsList results={results} setDisplayPokemon={setDisplayPokemon} />}
             {results && input && results.length === 0 && <h1>Pokemon Not Found</h1>}
-
-            {myRadio && <h1>{myRadio}</h1>}
-            {myDropdown && <h1>{myDropdown}</h1>}
-
-            {!myDropdown && <h1>myDropdown is null</h1>}
-            {myDropdown === "type" && myType && <h1>{myType}</h1>}
-            {myDropdown === "color" && myColor && <h1>{myColor}</h1>}
-            {myDropdown === "generation" && myGeneration && <h1>{myGeneration}</h1>}
-            {myDropdown === "ability" && myAbility && <h1>{myAbility}</h1>}
         </div>
     )
 };
