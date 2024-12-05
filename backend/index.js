@@ -15,7 +15,7 @@ app.use(json());
 const initializeDatabase = async () => {
   try {
     await setupdb();
-    console.log("Database setup complete. Transferring Pokemon data to the database.");
+    console.log("Database setup complete. Transferring Pokemon data to the database. This process will take 2-3 minutes.");
 
     await getPokemon();
     console.log("All done getting pokemon into the database.");
