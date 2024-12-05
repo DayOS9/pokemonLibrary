@@ -59,21 +59,41 @@ function SearchBar({ setDisplayPokemon }) {
     const [results, setResults] = useState([]);
 
     const fetchData = (value) => {
-        fetch("/api/pokemon/all")
-        .then((response) => response.json())
-        .then((json) => {
-            const results = json.filter((user) => {
-                return (
-                    value &&
-                    user &&
-                    ((user.dexname &&
-                    user.dexname.toLowerCase().includes(value)) ||
-                    (user.dexid &&
-                    user.dexid.toString().includes(value)))
-                );
+        if (myRadio === "all") { 
+            fetch("/api/pokemon/all")
+            .then((response) => response.json())
+            .then((json) => {
+                const results = json.filter((user) => {
+                    return (
+                        value &&
+                        user &&
+                        ((user.dexname &&
+                        user.dexname.toLowerCase().includes(value)) ||
+                        (user.dexid &&
+                        user.dexid.toString().includes(value)))
+                    );
+                });
+                setResults(results);
             });
-            setResults(results);
-        });
+        } else if (myRadio === "favorites") {
+            fetch("/api/pokemon/all/favorites")
+            .then((response) => response.json())
+            .then((json) => {
+                const results = json.filter((user) => {
+                    return (
+                        value &&
+                        user &&
+                        ((user.dexname &&
+                        user.dexname.toLowerCase().includes(value)) ||
+                        (user.dexid &&
+                        user.dexid.toString().includes(value)))
+                    );
+                });
+                setResults(results);
+            });
+        } else {
+            setResults([]);
+        }
     };
 
     const handleChange = (value) => {
@@ -163,6 +183,7 @@ function SearchBar({ setDisplayPokemon }) {
             </div>
 
             {results && results.length > 0 && <SearchResultsList results={results} setDisplayPokemon={setDisplayPokemon} />}
+            {results && input && results.length === 0 && <h1>Pokemon Not Found</h1>}
 
             {myRadio && <h1>{myRadio}</h1>}
             {myDropdown && <h1>{myDropdown}</h1>}

@@ -10,7 +10,6 @@ import Footer from "./components/Footer"
 import defpokemon from "./components/images/defpokemon.png"
 
 function App() {
-    // const [displayPokemon, setDisplayPokemon] = useState(SAMPLEPOKEMON);
     const [displayPokemon, setDisplayPokemon] = useState();
 
     return (
