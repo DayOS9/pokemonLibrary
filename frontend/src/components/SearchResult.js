@@ -1,13 +1,23 @@
 import "./SearchResult.css";
 
-export const SearchResult = ({ rid, rname }) => {
+export const SearchResult = ({ result, setDisplayPokemon }) => {
     const handleClick = (e) => {
-        alert(`You selected ${rid} , ${rname}!`);
+        alert(`You selected ${result.id} , ${result.name}!`);
+        setDisplayPokemon({
+            id:result.id, 
+            name:result.name, 
+            nickname:result.username, 
+            stats:{hp: 200,att: 21,def: 345,spatt: 423,spdef: 511,spd: 622}, 
+            type:result.email, 
+            color:result.phone, 
+            generation:result.website, 
+            ability:result.company.catchPhrase
+        });
     }
 
     return (
         <div className="search-result" onClick={handleClick}>
-            {`${rid}: ${rname}`}
+            {`${result.id}: ${result.name}`}
         </div>
     );
 };

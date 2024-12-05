@@ -23,6 +23,7 @@
 
 .dbtoggles {
     display: block;
+    min-height: 32px;
     width: 100%;
     margin: 16px;
     clear: left;
@@ -38,6 +39,7 @@
     margin-right: 8px;
     width: 160px;
     overflow: scroll;
+    text-align: center;
 }
 
 .searchbarcontainer {
