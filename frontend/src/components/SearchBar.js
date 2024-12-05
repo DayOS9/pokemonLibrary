@@ -66,8 +66,10 @@ function SearchBar({ setDisplayPokemon }) {
                 return (
                     value &&
                     user &&
-                    user.dexname &&
-                    user.dexname.toLowerCase().includes(value)
+                    ((user.dexname &&
+                    user.dexname.toLowerCase().includes(value)) ||
+                    (user.dexid &&
+                    user.dexid.toString().includes(value)))
                 );
             });
             setResults(results);
