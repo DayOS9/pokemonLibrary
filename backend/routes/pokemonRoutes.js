@@ -25,7 +25,7 @@ import {
   abilities,
   generations,
 } from "../controllers/pokemonController.js";
-import { types } from "pg";
+
 const router = express.Router();
 
 router.patch("/pokemon/id/:id/nickname", updateNickNameByIdFav);
