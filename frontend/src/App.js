@@ -70,9 +70,6 @@ function App() {
         console.log(displayPokemon);
         fetch(`/api/pokemon/id/${displayPokemon.id}/add/favorites`, {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            }
         })
         .then((response) => response.json())
         .then((json) => {
@@ -88,9 +85,6 @@ function App() {
         console.log(displayPokemon);
         fetch(`/api/pokemon/id/${displayPokemon.id}/delete/favorites`, {
             method: "DELETE",
-            headers: {
-                "Content-Type": "application/json"
-            }
         })
         .then((response) => response.json())
         .then((json) => {
