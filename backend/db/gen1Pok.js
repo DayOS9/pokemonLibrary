@@ -1,4 +1,5 @@
 import { pool } from "../db/pool.js";
+import { capitalizeFirstChar } from "./capitalize.js";
 
 const getGen1Pokemon = async () => {
   try {
@@ -20,7 +21,7 @@ const getGen1Pokemon = async () => {
 
         const speciesResponse = await fetch(pokemonData.species.url);
         const speciesData = await speciesResponse.json();
-        const color = speciesData.color.name;
+        const color = capitalizeFirstChar(speciesData.color.name);
 
         // insert to color, type, ability, gen table (the ids)
         await pool.query(
@@ -30,17 +31,17 @@ const getGen1Pokemon = async () => {
 
         await pool.query(
           "UPDATE generation SET g_list = array_append(g_list, $1) WHERE g_generationname = $2",
-          [index, "generation-i"],
+          [index, "I"],
         );
 
         await pool.query(
           "UPDATE typing SET t_list = array_append(t_list, $1) WHERE t_primarytype = $2",
-          [index, pokemonData.types[0].type.name],
+          [index, capitalizeFirstChar(pokemonData.types[0].type.name)],
         );
 
         await pool.query(
           "UPDATE ability SET a_list = array_append(a_list, $1) WHERE a_primaryability = $2",
-          [index, pokemonData.abilities[0].ability.name],
+          [index, capitalizeFirstChar(pokemonData.abilities[0].ability.name)],
         );
 
         const query = `
@@ -51,7 +52,7 @@ const getGen1Pokemon = async () => {
 
         const values = [
           index,
-          pokemonData.name,
+          capitalizeFirstChar(pokemonData.name),
           pokemonData.stats[0].base_stat,
           pokemonData.stats[1].base_stat,
           pokemonData.stats[2].base_stat,
@@ -60,9 +61,9 @@ const getGen1Pokemon = async () => {
           pokemonData.stats[5].base_stat,
           pokemonData.weight,
           pokemonData.height,
-          pokemonData.types[0].type.name,
-          pokemonData.abilities[0].ability.name,
-          "generation-i",
+          capitalizeFirstChar(pokemonData.types[0].type.name),
+          capitalizeFirstChar(pokemonData.abilities[0].ability.name),
+          "I",
           color,
         ];
 
