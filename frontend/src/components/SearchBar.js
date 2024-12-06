@@ -1,56 +1,34 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { SearchResultsList } from "./SearchResultsList";
 
 import "./SearchBar.css"
 
 function SearchBar({ displayid, setDisplayPokemon, myRadio, myDropdown, input, results, setMyRadio, setMyDropdown, setInput, setResults, setFeedback }) {
-    const [TYPES, setTYPES] = useState([
-        {value: "normal", label: "Normal"},
-        {value: "fighting", label: "Fighting"},
-        {value: "flying", label: "Flying"},
-        {value: "poison", label: "Poison"},
-        {value: "ground", label: "Ground"},
-        {value: "rock", label: "Rock"},
-        {value: "bug", label: "Bug"},
-        {value: "ghost", label: "Ghost"},
-        {value: "steel", label: "Steel"},
-        {value: "fire", label: "Fire"},
-        {value: "water", label: "Water"},
-        {value: "grass", label: "Grass"},
-        {value: "electric", label: "Electric"},
-        {value: "psychic", label: "Psychic"},
-        {value: "ice", label: "Ice"},
-        {value: "dragon", label: "Dragon"},
-        {value: "dark", label: "Dark"},
-    ]);
-    const [COLORS, setCOLORS] = useState([
-        {value: "red", label: "Red"},
-        {value: "yellow", label: "Yellow"},
-        {value: "green", label: "Green"},
-        {value: "blue", label: "Blue"},
-        {value: "purple", label: "Purple"},
-        {value: "pink", label: "Pink"},
-        {value: "brown", label: "Brown"},
-        {value: "black", label: "Black"},
-        {value: "gray", label: "Gray"},
-        {value: "white", label: "White"},
-    ]);
-    const [GENERATIONS, setGENERATIONS] = useState([
-        {value: "gen1", label: "Generation I"},
-        {value: "gen2", label: "Generation II"},
-        {value: "gen3", label: "Generation III"},
-    ]);
-    const [ABILITIES, setABILITIES] = useState([
-        {value: "blaze", label: "Blaze"},
-        {value: "torrent", label: "Torrent"},
-        {value: "overgrow", label: "Overgrow"},
-    ]);
+    const [TYPES, setTYPES] = useState([]);
+    const [COLORS, setCOLORS] = useState([]);
+    const [GENERATIONS, setGENERATIONS] = useState([]);
+    const [ABILITIES, setABILITIES] = useState([]);
 
     const [myType, setMyType] = useState("all");
     const [myColor, setMyColor] = useState("all");
     const [myGeneration, setMyGeneration] = useState("all");
     const [myAbility, setMyAbility] = useState("all");
+
+    useEffect(() => {
+        fetch("/api/pokemon/type")
+            .then((response) => response.json())
+            .then((data) => setTYPES(data.map((type) => ({value: type.t_primarytype, label: type.t_primarytype}))));
+        fetch("/api/pokemon/color")
+            .then((response) => response.json())
+            .then((data) => setCOLORS(data.map((color) => ({value: color.c_colorname, label: color.c_colorname}))));
+        fetch("/api/pokemon/generation")
+            .then((response) => response.json())
+            .then((data) => setGENERATIONS(data.map((gen) => ({value: gen.g_generationname, label: gen.g_generationname}))));
+        fetch("/api/pokemon/ability")
+            .then((response) => response.json())
+            .then((data) => setABILITIES(data.map((ability) => ({value: ability.a_primaryability, label: ability.a_primaryability}))));
+    }, []);
 
     const fetchData = (value) => {
         if (myRadio === "all") { 
