@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import './App.css';
 import Header from "./components/Header"
@@ -8,17 +8,62 @@ import SearchBar from './components/SearchBar';
 import Footer from "./components/Footer"
 
 import defpokemon from "./components/images/defpokemon.png"
+import loadinggif from "./components/images/loading.gif"
+import favmedal from "./components/images/favorite.png"
 
 function App() {
-    const [displayPokemon, setDisplayPokemon] = useState();
+    const [displayPokemon, setDisplayPokemon] = useState({
+            id:-1, 
+            name:"sample-name", 
+            nickname:"sample-nickname", 
+            stats:{
+                hp: 0,
+                att: 0,
+                def: 0,
+                spatt: 0,
+                spdef: 0,
+                spd: 0,
+                weight: 0,
+                height: 0
+            }, 
+            type:"sample-type", 
+            color:"sample-color", 
+            generation:"sample-generation", 
+            ability:"sample-ability"
+        });
 
     const [myRadio, setMyRadio] = useState("all");
     const [myDropdown, setMyDropdown] = useState("");
     
     const [input, setInput] = useState("");
     const [results, setResults] = useState([]);
+    const [favorites, setFavorites] = useState([]);
 
     const [feedback, setFeedback] = useState("");
+
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        console.log("displayPokemon changed");
+        setLoading(true);
+        updateFavorites();
+    }, [displayPokemon]);
+
+    const updateFavorites = (e) => {
+        fetch("/api/pokemon/all/favorites")
+        .then((response) => response.json())
+        .then((json) => {
+            const favorites = json.filter((user) => {
+                return (
+                    user &&
+                    (user.dexid &&
+                    user.dexid.toString() === displayPokemon.id.toString())
+                );
+            });
+            setFavorites(favorites);
+            console.log(favorites);
+        });
+    }
 
     const handleFavorite = (e) => {
         console.log(displayPokemon);
@@ -34,6 +79,7 @@ function App() {
             setFeedback(json.message);
             setInput("");
             setResults([]);
+            updateFavorites();
         });
     }
 
@@ -51,6 +97,7 @@ function App() {
             setFeedback(json.message);
             setInput("");
             setResults([]);
+            updateFavorites();
         });
     }
 
@@ -63,6 +110,7 @@ function App() {
                         <Header />
                     </div>
                     <SearchBar 
+                        displayid={displayPokemon.id}
                         setDisplayPokemon={setDisplayPokemon} 
                         myRadio={myRadio} myDropdown={myDropdown} 
                         input={input} results={results} 
@@ -70,24 +118,40 @@ function App() {
                         setMyDropdown={setMyDropdown} 
                         setInput={setInput} 
                         setResults={setResults} 
+                        setFeedback={setFeedback}
                     />
                 </div>
                 <div className="DisplayContainer">
                     <div className="displayimg">
-                        {displayPokemon ? (
-                            <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${displayPokemon.id}.png`} alt={`${displayPokemon.name}`} height={400} width={400} />
+                        {displayPokemon && displayPokemon.id >= 0 ? (
+                            <>
+                            <div style={{display: loading ? "block" : "none"}}>
+                                <img src={loadinggif} alt={`Loading Image`} height={400} width={400} />
+                            </div>
+                            <div style={{display: loading ? "none" : "block"}}>
+                                <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${displayPokemon.id}.png`} alt={`${displayPokemon.name}`} height={400} width={400} onLoad={(e) => {setLoading(false)}} />
+                            </div>
+                            </>
                         ) : (
                             <img src={defpokemon} alt="Default Pokemon img" height={400} width={400} />
                         )}
                     </div>
 
                     <div className="displaystats">
-                        {displayPokemon ? (
+                        {displayPokemon && displayPokemon.id >= 0 ? (
                             <>
-                                {displayPokemon.nickname ? 
-                                    (<h1>{`${displayPokemon.id}: ${displayPokemon.name} (${displayPokemon.nickname})`}</h1>) :
-                                    (<h1>{`${displayPokemon.id}: ${displayPokemon.name}`}</h1>)
-                                }
+                                <div style={{display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center"}}>
+                                {favorites && favorites.length > 0 ? (
+                                    <img src={favmedal} height={64} width={64}/>
+                                ) : (
+                                    <div></div>
+                                )}
+                                {displayPokemon.nickname ? (
+                                    <h1>{`${displayPokemon.id}: ${displayPokemon.name} (${displayPokemon.nickname})`}</h1>
+                                ) : (
+                                    <h1>{`${displayPokemon.id}: ${displayPokemon.name}`}</h1>
+                                )}
+                                </div>
                                 <h2>Stats:</h2>
                                 <h3>{`HP: ${displayPokemon.stats.hp}`}</h3>
                                 <h3>{`ATT: ${displayPokemon.stats.att}`}</h3>
@@ -108,11 +172,14 @@ function App() {
                     </div>
                 </div>
 
-                {displayPokemon ? (
+                {displayPokemon && displayPokemon.id >= 0 ? (
                     <>
                         <div className="FavoritesOptions">
-                            <button onClick={handleFavorite}>Favorite Pokemon</button>
-                            <button onClick={handleUnfavorite}>Unfavorite Pokemon</button>
+                            {favorites && favorites.length > 0 ? (
+                                <button onClick={handleUnfavorite}>Unfavorite Pokemon</button>
+                            ) : (
+                                <button onClick={handleFavorite}>Favorite Pokemon</button>
+                            )}
                         </div>
                         <h3 style={{textAlign: "center"}}>{feedback}</h3>
                     </>

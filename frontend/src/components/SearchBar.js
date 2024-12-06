@@ -4,7 +4,7 @@ import { SearchResultsList } from "./SearchResultsList";
 
 import "./SearchBar.css"
 
-function SearchBar({ setDisplayPokemon, myRadio, myDropdown, input, results, setMyRadio, setMyDropdown, setInput, setResults }) {
+function SearchBar({ displayid, setDisplayPokemon, myRadio, myDropdown, input, results, setMyRadio, setMyDropdown, setInput, setResults, setFeedback }) {
     const [TYPES, setTYPES] = useState([
         {value: "normal", label: "Normal"},
         {value: "fighting", label: "Fighting"},
@@ -178,7 +178,7 @@ function SearchBar({ setDisplayPokemon, myRadio, myDropdown, input, results, set
                 <input placeholder="Search for a Pokemon name or Pokedex ID!" value={input} onChange={(e) => handleChange(e.target.value)}/>
             </div>
 
-            {results && results.length > 0 && <SearchResultsList results={results} setDisplayPokemon={setDisplayPokemon} />}
+            {results && results.length > 0 && <SearchResultsList results={results} setResults={setResults} setInput={setInput} displayid={displayid} setDisplayPokemon={setDisplayPokemon} setFeedback={setFeedback} />}
             {results && input && results.length === 0 && <h1>Pokemon Not Found</h1>}
         </div>
     )
