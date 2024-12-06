@@ -9,6 +9,7 @@ const getGen1Pokemon = async () => {
       console.log("Pokemon data already exists. Skipping loop");
       return;
     }
+    //ryan
 
     for (let index = 1; index < 152; index++) {
       try {
