@@ -1,10 +1,15 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { SearchResultsList } from "./SearchResultsList";
 
 import "./SearchBar.css"
 
 function SearchBar({ setDisplayPokemon, myRadio, myDropdown, input, results, setMyRadio, setMyDropdown, setInput, setResults }) {
+    /*const [TYPES, setTYPES] = useState([]);
+    const [COLORS, setCOLORS] = useState([]);
+    const [GENERATIONS, setGENERATIONS] = useState([]);
+    const [ABILITIES, setABILITIES] = useState([]); */
+
     const [TYPES, setTYPES] = useState([
         {value: "normal", label: "Normal"},
         {value: "fighting", label: "Fighting"},
@@ -45,12 +50,27 @@ function SearchBar({ setDisplayPokemon, myRadio, myDropdown, input, results, set
         {value: "blaze", label: "Blaze"},
         {value: "torrent", label: "Torrent"},
         {value: "overgrow", label: "Overgrow"},
-    ]);
+    ]); 
 
     const [myType, setMyType] = useState("all");
     const [myColor, setMyColor] = useState("all");
     const [myGeneration, setMyGeneration] = useState("all");
     const [myAbility, setMyAbility] = useState("all");
+
+    /*useEffect(() => {
+        fetch("/api/pokemon/type")
+            .then((response) => response.json())
+            .then((data) => setTYPES(data.map((type) => ({value: type.t_primarytype, label: type.t_primarytype}))));
+        fetch("/api/pokemon/color")
+            .then((response) => response.json())
+            .then((data) => setCOLORS(data.map((color) => ({value: color.c_colorname, label: color.c_colorname}))));
+        fetch("/api/pokemon/generation")
+            .then((response) => response.json())
+            .then((data) => setGENERATIONS(data.map((gen) => ({value: gen.g_generationname, label: gen.g_generationname}))));
+        fetch("/api/pokemon/ability")
+            .then((response) => response.json())
+            .then((data) => setABILITIES(data.map((ability) => ({value: ability.a_primaryability, label: ability.a_primaryability}))));
+    }, []); */
 
     const fetchData = (value) => {
         if (myRadio === "all") { 

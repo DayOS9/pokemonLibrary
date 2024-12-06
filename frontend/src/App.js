@@ -7,7 +7,7 @@ import Logo from "./components/Logo"
 import SearchBar from './components/SearchBar';
 import Footer from "./components/Footer"
 
-import defpokemon from "./components/images/defpokemon.png"
+import defpokemon from "./components/images/defpokemon1.gif"
 
 function App() {
     const [displayPokemon, setDisplayPokemon] = useState();

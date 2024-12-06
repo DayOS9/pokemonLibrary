@@ -1,16 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Doto:wght@100..900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
 html {
-    background-color: #eee;
+    height: 100%;
+    background-color: #919191;
 }
 
 .Header {
-    font-weight: bold;
+    /*font-weight: bold;
     padding: 0.4rem;
     display: flex;
+    flex-direction: column; */
+
+    background-color: #FFCC00;
+    padding: 0.4rem;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 190px;
+    height: 100%;
+    display: flex;
     flex-direction: column;
+    align-items: center;
+    font-weight: bold; 
 }
 
 .App {
-    background-color: #eee;
+    background-color: #919191;
     width: 100vw;
     padding-left: 100px;
     padding-right: 100px;
@@ -18,7 +34,8 @@ html {
 }
 
 .SearchBoxContainer {
-    margin: auto;
+    /*margin: auto; */
+    margin-left: 100px;
     display: flex;
     flex-direction: row;
     align-items: start;
@@ -28,7 +45,7 @@ html {
 
 .DisplayContainer {
     margin: auto;
-    margin-top: 32px;
+    margin-top: 20px;
     padding: 32px;
     display:flex;
     flex-direction: row;
@@ -56,8 +73,8 @@ html {
     display: flex;
     flex-direction: row;
     align-items: start;
-    min-width: 200px;
-    max-height: 320px;
+    /*min-width: 200px;
+    max-height: 320px; */
     font-weight: bold;
     padding: 0.4rem;
     justify-content: center;
