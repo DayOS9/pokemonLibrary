@@ -46,6 +46,7 @@ html {
 .DisplayContainer {
     margin: auto;
     margin-top: 20px;
+    margin-left: 50px;
     padding: 32px;
     display:flex;
     flex-direction: row;
@@ -54,15 +55,25 @@ html {
     min-width: 200px;
 }
 
-.FavoritesOptions {
+.FavoritesOptions button {
+    font-size: 1.0rem;
+    font-family: 'Sour Gummy', normal;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 12px;
+
     margin: auto;
-    padding: 16px;
+    padding: 10px;
     display:flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
     text-align: center;
     min-width: 200px;
+}
+
+.FavoritesOptions button:active {
+    transform: scale(1.1);
 }
 
 .Footer {
@@ -80,3 +91,94 @@ html {
     justify-content: center;
     text-align: center;
 }
+
+.displaystats {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 20px;
+  padding: 10px;
+  background-color: #FFFFFF;
+  border: 6px solid #CE2211;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.stats-chart {
+  width: 100%;
+}
+
+.stat-row {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.stat-name {
+  width: 150px;
+  font-family: "Press Start 2P", cursive;
+  color: #0A285F;
+  font-size: 0.8rem;
+}
+
+.stat-container {
+  flex: 1;
+  background-color: #919191;
+  height: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.stat-bar {
+  height: 100%;
+  background-color: #CE2211;
+}
+
+.stat-value {
+  width: 50px;
+  text-align: right;
+  font-family: "Press Start 2P", cursive;
+  color: #0A285F;
+  font-size: 0.8rem;
+}
+
+.display-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 10px;
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #DFDFDF;
+  border-radius: 10px;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #919191;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  flex-basis: 45%; 
+  text-align: center;
+}
+
+.detail-item h3 {
+  margin: 0;
+  font-family: "Press Start 2P", cursive;
+  font-size: 0.8rem;
+  color: #0A285F;
+}
+
+.detail-value {
+  font-family: "Press Start 2P", cursive;
+  font-size: 0.9rem;
+  color: #FF4500;
+  margin-top: 5px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
