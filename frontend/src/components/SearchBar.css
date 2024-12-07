@@ -23,6 +23,8 @@
 }
 
 .dbtoggles {
+    font-family: 'Sour Gummy', normal;
+    font-size: 1.0rem;
     display: block;
     min-height: 32px;
     width: 100%;
@@ -36,6 +38,8 @@
 }
 
 .toggle-dropdown {
+    font-family: 'Sour Gummy', normal;
+    font-size: 1.0rem;
     margin-left: 32px;
     margin-right: 8px;
     width: 160px;
