@@ -21,9 +21,9 @@ function Footer() {
                     justifyContent: 'center',
                     gap: '20px'
                 }}>
-                    <li><a href="https://github.com/DayOS9/pokemonLibrary" target="_blank" rel="noopener noreferrer" style={{color: '#FFF', fontWeight: 'normal'}} >Assignment Details</a></li>
+                    <li><a href="https://docs.google.com/document/d/1z0yB0QR7TbjIHSRQN4iudeUDyjkOXLtiZftuDmv1GXY/edit?usp=sharing" target="_blank" rel="noopener noreferrer" style={{ color: '#FFF', fontWeight: 'normal'}}>Assignment Details</a></li>
                     <li><a href="https://pokeapi.co" target="_blank" rel="noopener noreferrer" style={{ color: '#FFF', fontWeight: 'normal'}}>Pokémon API</a></li>
-                    <li><a href="https://docs.google.com/document/d/1yXNXHCdsTkwSddZ8jh40-3zgl2BQqaBiK-Oqq5s6WXQ/edit?usp=sharing" target="_blank" rel="noopener noreferrer" style={{ color: '#FFF', fontWeight: 'normal'}}>About Project</a></li>
+                    <li><a href="https://github.com/DayOS9/pokemonLibrary" target="_blank" rel="noopener noreferrer" style={{color: '#FFF', fontWeight: 'normal'}} >Github Link</a></li>
                     <li><a href="https://docs.google.com/document/d/1xw23eNMznudguenz-clG8soGOxGYiNCTnWinzhHwpFw/edit?usp=sharing" target="_blank" rel="noopener noreferrer" style={{ color: '#FFF', fontWeight: 'normal'}}>Contact Us</a></li>
                 </ul>
             </nav>
