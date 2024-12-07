@@ -7,9 +7,20 @@ import Logo from "./components/Logo"
 import SearchBar from './components/SearchBar';
 import Footer from "./components/Footer"
 
-import defpokemon from "./components/images/defpokemon.png"
+/*import defpokemon from "./components/images/defpokemon.png" */
 import loadinggif from "./components/images/loading.gif"
 import favmedal from "./components/images/favorite.png"
+import defpokemon from "./components/images/defpokemon1.gif"
+
+//import icons
+import hpIcon from "./components/images/hp.png";
+import speedIcon from "./components/images/speed.png";
+import defenseIcon from "./components/images/defense.png";
+import attackIcon from "./components/images/attack.png";
+import spAttackIcon from "./components/images/spattack.png";
+import spDefenseIcon from "./components/images/spdefense.png";
+import weightIcon from "./components/images/weight.png";
+import heightIcon from "./components/images/height.png";
 
 function App() {
     const [displayPokemon, setDisplayPokemon] = useState({
@@ -49,6 +60,18 @@ function App() {
         updateFavorites();
     }, [displayPokemon]);
 
+    const statIcons = {
+        hp: hpIcon,
+        att: attackIcon,
+        def: defenseIcon,
+        spatt: spAttackIcon,
+        spdef: spDefenseIcon,
+        spd: speedIcon,
+        weight: weightIcon,
+        height: heightIcon,
+    };
+    
+
     const updateFavorites = (e) => {
         fetch("/api/pokemon/all/favorites")
         .then((response) => response.json())
@@ -69,11 +92,8 @@ function App() {
         console.log(displayPokemon);
         fetch(`/api/pokemon/id/${displayPokemon.id}/add/favorites`, {
             method: "POST",
-            // headers: {
-            //     "Content-Type": "application/json"
-            // }
         })
-        .then((response) => (response.json()))
+        .then((response) => response.json())
         .then((json) => {
             console.log(json);
             setFeedback(json.message);
@@ -87,9 +107,6 @@ function App() {
         console.log(displayPokemon);
         fetch(`/api/pokemon/id/${displayPokemon.id}/delete/favorites`, {
             method: "DELETE",
-            // headers: {
-            //     "Content-Type": "application/json"
-            // }
         })
         .then((response) => response.json())
         .then((json) => {
@@ -102,7 +119,7 @@ function App() {
     }
 
     return (
-        <>
+        <>  
             <div className='App'>
                 <div className="SearchBoxContainer">
                     <div className='Header'>
@@ -140,48 +157,74 @@ function App() {
                     <div className="displaystats">
                         {displayPokemon && displayPokemon.id >= 0 ? (
                             <>
-                                <div style={{display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center"}}>
+                                <div style={{fontFamily: "'Press Start 2P', cursive", color: "#0A285F", fontSize: "1.0rem", textShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)", letterSpacing: "0px", margin: "0", display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center"}}>
                                 {favorites && favorites.length > 0 ? (
                                     <img src={favmedal} height={64} width={64}/>
                                 ) : (
                                     <div></div>
                                 )}
                                 {displayPokemon.nickname ? (
-                                    <h1>{`${displayPokemon.id}: ${displayPokemon.name} (${displayPokemon.nickname})`}</h1>
+                                    <h1> {`${displayPokemon.id}: ${displayPokemon.name.toUpperCase()} (${displayPokemon.nickname})`}</h1>
                                 ) : (
-                                    <h1>{`${displayPokemon.id}: ${displayPokemon.name}`}</h1>
+                                    <h1>{`${displayPokemon.id}: ${displayPokemon.name.toUpperCase()}`}</h1>
                                 )}
                                 </div>
-                                <h2>Stats:</h2>
-                                <h3>{`HP: ${displayPokemon.stats.hp}`}</h3>
-                                <h3>{`ATT: ${displayPokemon.stats.att}`}</h3>
-                                <h3>{`DEF: ${displayPokemon.stats.def}`}</h3>
-                                <h3>{`SP-ATT: ${displayPokemon.stats.spatt}`}</h3>
-                                <h3>{`SP-DEF: ${displayPokemon.stats.spdef}`}</h3>
-                                <h3>{`SPEED: ${displayPokemon.stats.spd}`}</h3>
-                                <h3>{`WEIGHT: ${displayPokemon.stats.weight}`}</h3>
-                                <h3>{`HEIGHT: ${displayPokemon.stats.height}`}</h3>
-                                <h2>{`Type: ${displayPokemon.type}`}</h2>
-                                <h2>{`Color: ${displayPokemon.color}`}</h2>
-                                <h2>{`Generation: ${displayPokemon.generation}`}</h2>
-                                <h2>{`Ability: ${displayPokemon.ability}`}</h2>
+                                <div className="stats-chart">
+                                {Object.entries(displayPokemon.stats).map(([key, value]) => {
+                                    const widthOfBar = Math.min((value/ 255) * 100, 100);
+                                    return (
+                                        <div key={key} className="stat-row" style={{display: "flex", alignItems: "center", marginBottom: "10px"}}>
+                                            <div className="stat-name" style={{ display: "flex", alignItems: "center", gap: "10px" }} >
+                                                <img
+                                                     src={statIcons[key]} 
+                                                     alt={`${key} icon`} 
+                                                     style={{ width: "24px", height: "24px" }}
+                                                />
+                                                {key.toUpperCase()}:</div>
+                                            <div className="stat-container" style={{ flexGrow: 1, marginLeft: "10px" }} >
+                                            <div className="stat-bar" style={{ width: `${widthOfBar}%` }}></div>
+                                            </div>
+                                            <div className="stat-value" style={{ marginLeft: "10px" }}  >{value}</div>
+                                        </div>
+                                    );
+                                })}
+                                </div>
+                                <div className="display-details">
+                                <div className="detail-item">
+                                    <h3>Type:</h3>
+                                    <span className="detail-value">{displayPokemon.type}</span>
+                                </div>
+                                <div className="detail-item">
+                                    <h3>Color:</h3>
+                                    <span className="detail-value">{displayPokemon.color}</span>
+                                </div>
+                                <div className="detail-item">
+                                    <h3>Generation:</h3>
+                                    <span className="detail-value">{displayPokemon.generation}</span>
+                                </div>
+                                <div className="detail-item">
+                                    <h3>Ability:</h3>
+                                    <span className="detail-value">{displayPokemon.ability}</span>
+                                </div>
+                                </div>
                             </>
                         ) : (
-                            <h1>Search for a Pokemon<br/>to learn more about it!</h1>
+                            <h1 style={{fontFamily: "'Press Start 2P', cursive", color: "#0A285F", fontSize: "1.3rem", textShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)", letterSpacing: "1px", margin: "0"}}> Search for a Pokemon<br/>to learn more about it!</h1>
                         )}
                     </div>
-                </div>
+                </div> 
 
                 {displayPokemon && displayPokemon.id >= 0 ? (
                     <>
                         <div className="FavoritesOptions">
                             {favorites && favorites.length > 0 ? (
-                                <button onClick={handleUnfavorite}>Unfavorite Pokemon</button>
+                                <button style={{backgroundColor: "#FFCC00", color: "#FFFFFF", border: "6px solid #0A285F"}} onClick={handleUnfavorite}>Unfavorite Pokemon</button>
                             ) : (
-                                <button onClick={handleFavorite}>Favorite Pokemon</button>
+                                <button style={{backgroundColor: "#CE2211", color: "#FFFFFF", border: "6px solid #000000"}} onClick={handleFavorite}>Favorite Pokemon</button>
                             )}
                         </div>
-                        <h3 style={{textAlign: "center"}}>{feedback}</h3>
+                        <br />
+                        <h3 style={{textAlign: "center", fontFamily: "'Sour Gummy', normal", fontSize: "1.3rem"}}>{feedback.toUpperCase()}</h3>
                     </>
                 ) : (<div></div>)}
             </div>
@@ -190,6 +233,6 @@ function App() {
             </div>
         </>
     );
-}
+} 
 
 export default App;
