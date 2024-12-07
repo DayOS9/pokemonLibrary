@@ -39,16 +39,28 @@ function App() {
     const [input, setInput] = useState("");
     const [results, setResults] = useState([]);
     const [favorites, setFavorites] = useState([]);
+    const [nickname, setNickname] = useState("");
 
     const [feedback, setFeedback] = useState("");
 
     const [loading, setLoading] = useState(true);
+    const [dontload, setDontload] = useState(false);
 
     useEffect(() => {
         console.log("displayPokemon changed");
-        setLoading(true);
+        if (!dontload) {
+            setLoading(true);
+        }
+        setDontload(false);
         updateFavorites();
     }, [displayPokemon]);
+
+    useEffect(() => {
+        if (favorites && favorites.length > 0 && displayPokemon.id.toString() === favorites[0].dexid.toString() && displayPokemon.nickname !== favorites[0].nickname) {
+            setDisplayPokemon(prev => ({...prev, nickname: favorites[0].nickname}));
+            setDontload(true);
+        }
+    }, [favorites]);
 
     const updateFavorites = (e) => {
         fetch("/api/pokemon/all/favorites")
@@ -78,6 +90,8 @@ function App() {
             setInput("");
             setResults([]);
             updateFavorites();
+            setDisplayPokemon(prev => ({...prev, nickname: ""}));
+            setDontload(true);
         });
     }
 
@@ -93,6 +107,44 @@ function App() {
             setInput("");
             setResults([]);
             updateFavorites();
+            setDisplayPokemon(prev => ({...prev, nickname: ""}));
+            setDontload(true);
+        });
+    }
+
+    const handleNickname = (e) => {
+        console.log(nickname);
+        fetch(`/api/pokemon/id/${displayPokemon.id}/nickname`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ nickname: nickname })
+        })
+        .then((response) => response.json())
+        .then((json) => {
+            console.log(json);
+            setDisplayPokemon({
+                id:json.dexid, 
+                name:json.dexname, 
+                nickname:json.nickname, 
+                stats:{
+                    hp: json.dexhp,
+                    att: json.dexattack,
+                    def: json.dexdefense,
+                    spatt: json.dexspecialattack,
+                    spdef: json.dexspecialdefense,
+                    spd: json.dexspeed,
+                    weight: json.dexweight,
+                    height: json.dexheight
+                }, 
+                type:json.t_primarytype, 
+                color:json.c_colorname, 
+                generation:json.g_generationname, 
+                ability:json.a_primaryability
+            });
+            setDontload(true);
+            setNickname("");
         });
     }
 
@@ -171,7 +223,15 @@ function App() {
                     <>
                         <div className="FavoritesOptions">
                             {favorites && favorites.length > 0 ? (
-                                <button onClick={handleUnfavorite}>Unfavorite Pokemon</button>
+                                <>
+                                    <button onClick={handleUnfavorite}>Unfavorite Pokemon</button>
+                                    <input 
+                                        placeholder="Enter a New Nickname!"
+                                        value={nickname}
+                                        onChange={(e) => setNickname(e.target.value.toString())}
+                                    />
+                                    <button onClick={handleNickname}>Set Nickname</button>
+                                </>
                             ) : (
                                 <button onClick={handleFavorite}>Favorite Pokemon</button>
                             )}
