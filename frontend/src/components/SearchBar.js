@@ -82,10 +82,10 @@ function SearchBar({
               ((user.dexname &&
                 user.dexname.toLowerCase().includes(value.toLowerCase())) ||
                 (user.dexid && user.dexid.toString().includes(value))) &&
-              (myType.toLowerCase() === user.t_primarytype.toString() ||
-                myAbility.toLowerCase() === user.a_primaryability.toString() ||
-                myGeneration.toLowerCase() === user.g_generationname ||
-                myColor.toLowerCase() === user.c_colorname.toString() ||
+              (myType.toLowerCase() === user.t_primarytype.toString().toLowerCase() ||
+                myAbility.toLowerCase() === user.a_primaryability.toString().toLowerCase() ||
+                myGeneration.toLowerCase() === user.g_generationname.toString().toLowerCase() ||
+                myColor.toLowerCase() === user.c_colorname.toString().toLowerCase() ||
                 (myType.toLowerCase() === "all" &&
                   myAbility.toLowerCase() === "all" &&
                   myGeneration.toLowerCase() === "all" &&
@@ -105,10 +105,10 @@ function SearchBar({
               ((user.dexname &&
                 user.dexname.toLowerCase().includes(value.toLowerCase())) ||
                 (user.dexid && user.dexid.toString().includes(value))) &&
-              (myType.toLowerCase() === user.t_primarytype.toString() ||
-                myAbility.toLowerCase() === user.a_primaryability.toString() ||
-                myGeneration.toLowerCase() === user.g_generationname ||
-                myColor.toLowerCase() === user.c_colorname.toString() ||
+              (myType.toLowerCase() === user.t_primarytype.toString().toLowerCase() ||
+                myAbility.toLowerCase() === user.a_primaryability.toString().toLowerCase() ||
+                myGeneration.toLowerCase() === user.g_generationname.toString().toLowerCase() ||
+                myColor.toLowerCase() === user.c_colorname.toString().toLowerCase() ||
                 (myType.toLowerCase() === "all" &&
                   myAbility.toLowerCase() === "all" &&
                   myGeneration.toLowerCase() === "all" &&

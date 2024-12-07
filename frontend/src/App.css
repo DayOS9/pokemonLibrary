@@ -72,6 +72,23 @@ html {
     min-width: 200px;
 }
 
+.FavoritesOptions input {
+    font-size: 1.0rem;
+    font-family: 'Sour Gummy', normal;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 12px;
+
+    margin: auto;
+    padding: 10px;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    text-align: center;
+    min-width: 200px;
+}
+
 .FavoritesOptions button:active {
     transform: scale(1.1);
 }
