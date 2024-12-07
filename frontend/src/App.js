@@ -12,6 +12,16 @@ import loadinggif from "./components/images/loading.gif"
 import favmedal from "./components/images/favorite.png"
 import defpokemon from "./components/images/defpokemon1.gif"
 
+//import icons
+import hpIcon from "./components/images/hp.png";
+import speedIcon from "./components/images/speed.png";
+import defenseIcon from "./components/images/defense.png";
+import attackIcon from "./components/images/attack.png";
+import spAttackIcon from "./components/images/spattack.png";
+import spDefenseIcon from "./components/images/spdefense.png";
+import weightIcon from "./components/images/weight.png";
+import heightIcon from "./components/images/height.png";
+
 function App() {
     const [displayPokemon, setDisplayPokemon] = useState({
             id:-1, 
@@ -45,6 +55,17 @@ function App() {
 
     const [loading, setLoading] = useState(true);
     const [dontload, setDontload] = useState(false);
+
+    const statIcons = {
+        hp: hpIcon,
+        att: attackIcon,
+        def: defenseIcon,
+        spatt: spAttackIcon,
+        spdef: spDefenseIcon,
+        spd: speedIcon,
+        weight: weightIcon,
+        height: heightIcon,
+    };
 
     useEffect(() => {
         console.log("displayPokemon changed");
@@ -204,12 +225,18 @@ function App() {
                                 {Object.entries(displayPokemon.stats).map(([key, value]) => {
                                     const widthOfBar = Math.min((value/ 255) * 100, 100);
                                     return (
-                                        <div key={key} className="stat-row">
-                                            <div className="stat-name">{key.toUpperCase()}:</div>
-                                            <div className="stat-container">
+                                        <div key={key} className="stat-row" style={{display: "flex", alignItems: "center", marginBottom: "10px"}}>
+                                            <div className="stat-name" style={{ display: "flex", alignItems: "center", gap: "10px" }} >
+                                                <img
+                                                     src={statIcons[key]} 
+                                                     alt={`${key} icon`} 
+                                                     style={{ width: "24px", height: "24px" }}
+                                                />
+                                                {key.toUpperCase()}:</div>
+                                            <div className="stat-container" style={{ flexGrow: 1, marginLeft: "10px" }} >
                                             <div className="stat-bar" style={{ width: `${widthOfBar}%` }}></div>
                                             </div>
-                                            <div className="stat-value">{value}</div>
+                                            <div className="stat-value" style={{ marginLeft: "10px" }}  >{value}</div>
                                         </div>
                                     );
                                 })}
